@@ -1,27 +1,15 @@
-
 -- COMMANDS LIBRARY.lua
--- ต้องผ่าน DARK ADMIN CORE + รหัสลับเท่านั้น!
+-- ตรวจสอบคีย์ wino444 ก่อนทำงาน
 
 local DA = getgenv().DarkAdmin
-if not DA then return end
 
--- ดึงรหัสลับจาก URL
-local url = debug.info(1, "s") -- ไม่ได้จริง แต่ใช้แทน
-local args = {}
-for arg in (game:HttpGetAsync(url):gmatch("[^&]+")) do
-	local k, v = arg:match("([^=]+)=([^&]+)")
-	if k then args[k] = v end
-end
-
-local receivedKey = args.key
-if not receivedKey or receivedKey ~= DA.AuthKey then
-	warn("การเข้าถึง COMMANDS LIBRARY ถูกปฏิเสธ — ไม่มีรหัสลับ!")
+-- ตรวจสอบว่ามี wino444 หรือไม่
+if not DA.wino444 then
+	warn("การเข้าถึงถูกปฏิเสธ — ไม่มีคีย์ wino444 (ไม่ได้โหลดผ่าน CORE)")
 	return
 end
 
--- ยืนยันตัวตนสำเร็จ
-DA.CoreAuthenticated = true
-
+-- ฟังก์ชันเพิ่มคำสั่ง
 function DA.AddCommand(name, desc, callback)
 	DA.Commands[name:lower()] = { desc = desc, func = callback }
 end
@@ -29,8 +17,8 @@ end
 -- คำสั่ง !cmds
 DA.AddCommand("!cmds", "แสดงรายการคำสั่งทั้งหมด", function()
 	local screenGui = DA.UI
-	local old = screenGui:FindFirstChild("CmdsUI")
-	if old then old:Destroy() end
+	local existing = screenGui:FindFirstChild("CmdsUI")
+	if existing then existing:Destroy() end
 
 	local frame = Instance.new("Frame")
 	frame.Name = "CmdsUI"
@@ -66,13 +54,13 @@ DA.AddCommand("!cmds", "แสดงรายการคำสั่งทั�
 	close.BackgroundColor3 = Color3.fromRGB(100,0,0)
 	close.Text = "X"
 	close.TextColor3 = Color3.fromRGB(255,100,100)
+	close.Font = Enum.Font.GothamBold
 	close.Parent = frame
 	local cc = Instance.new("UICorner")
 	cc.CornerRadius = UDim.new(0,8)
 	cc.Parent = close
 	close.Activated:Connect(function() frame:Destroy() end)
 
-	-- ลากได้
 	local dragging, ds, sp
 	frame.InputBegan:Connect(function(i)
 		if i.UserInputType == Enum.UserInputType.MouseButton1 or i.UserInputType == Enum.UserInputType.Touch then
@@ -93,14 +81,15 @@ DA.AddCommand("!cmds", "แสดงรายการคำสั่งทั�
 
 	local y = 0
 	for name, data in pairs(DA.Commands) do
-		local e = Instance.new("Frame")
-		e.Size = UDim2.new(1,-10,0,45)
-		e.Position = UDim2.new(0,5,0,y)
-		e.BackgroundColor3 = Color3.fromRGB(25,25,35)
-		e.Parent = scroll
+		local entry = Instance.new("Frame")
+		entry.Size = UDim2.new(1,-10,0,45)
+		entry.Position = UDim2.new(0,5,0,y)
+		entry.BackgroundColor3 = Color3.fromRGB(25,25,35)
+		entry.Parent = scroll
+
 		local ec = Instance.new("UICorner")
 		ec.CornerRadius = UDim.new(0,6)
-		ec.Parent = e
+		ec.Parent = entry
 
 		local n = Instance.new("TextLabel")
 		n.Size = UDim2.new(0.4,0,1,0)
@@ -110,7 +99,7 @@ DA.AddCommand("!cmds", "แสดงรายการคำสั่งทั�
 		n.Font = Enum.Font.Code
 		n.TextXAlignment = Enum.TextXAlignment.Left
 		n.TextSize = 16
-		n.Parent = e
+		n.Parent = entry
 
 		local d = Instance.new("TextLabel")
 		d.Size = UDim2.new(0.6,-10,1,0)
@@ -122,14 +111,14 @@ DA.AddCommand("!cmds", "แสดงรายการคำสั่งทั�
 		d.TextXAlignment = Enum.TextXAlignment.Left
 		d.TextSize = 14
 		d.TextWrapped = true
-		d.Parent = e
+		d.Parent = entry
 
 		y = y + 50
 	end
 	scroll.CanvasSize = UDim2.new(0,0,0,y)
 end)
 
-DA.AddCommand("!to", "ยังไม่กำหนด", function() end)
-DA.AddCommand("!fly", "ยังไม่กำหนด", function() end)
+DA.AddCommand("!to", "ยังไม่กำหนดฟังก์ชัน", function() end)
+DA.AddCommand("!fly", "ยังไม่กำหนดฟังก์ชัน", function() end)
 
-print("COMMANDS LIBRARY โหลดสำเร็จ — ผ่านการยืนยันตัวตน!")
+print("COMMANDS LIBRARY โหลดแล้ว! ผ่านการยืนยัน wino444")
