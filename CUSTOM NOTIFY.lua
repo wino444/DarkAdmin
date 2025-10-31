@@ -88,4 +88,4 @@ if not CN.UI then
 	createNotifyUI()
 end
 
-print("CUSTOM NOTIFY โหลดแล้ว! ใช้ CN.Show('หัวข้อ', 'ข้อความ', เวลา)")
+--วิธีใช้หลังรัน:CN.Show('หัวข้อ', 'ข้อความ', เวลา)
