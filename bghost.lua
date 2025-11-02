@@ -1,6 +1,11 @@
 -- 🔥 Exploiter's TouchFire Script 🔥
 -- Target: workspace.Ghost.UpperTorso.TouchInterest
 
+-- 🔥 แก้ไขสคริปต์ดึงผี: เพิ่ม Players + LocalPlayer + ป้องกัน nil (ส่งเฉพาะส่วนที่ซ่อม) 🔥
+
+local Players = game:GetService("Players")  -- เพิ่มตรงนี้!
+local LocalPlayer = Players.LocalPlayer
+
 local target = workspace:WaitForChild("Ghost", 5)
 if not target then 
     warn("❌ Ghost หายไปในความมืด... ไม่เจอใน workspace!")
@@ -19,19 +24,23 @@ if not touchInterest then
     return 
 end
 
+-- รอ Character + HRP (ป้องกัน nil)
+local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
 -- ถ้าเปิด kaienshield → ชั่วคราวยกเว้น UpperTorso ของ Ghost
-if getgenv().KaienProtectEnabled then
+if getgenv().KaienProtectEnabled and getgenv().ApplyKaienShield then
 	getgenv().ApplyKaienShield(upperTorso) -- ป้องกันทุกอย่าง ยกเว้น Ghost ตัวนี้
 end
 
 -- 🚀 ยิงสัมผัสทันที!
-firetouchinterest(Players.LocalPlayer.Character.HumanoidRootPart, upperTorso, 0)
+firetouchinterest(hrp, upperTorso, 0)
 task.wait()
-firetouchinterest(Players.LocalPlayer.Character.HumanoidRootPart, upperTorso, 1)
+firetouchinterest(hrp, upperTorso, 1)
 
--- หลังดึงเสร็จ → กลับไปป้องกันเต็ม (ไม่ต้อง exclude)
+-- หลังดึงเสร็จ → กลับไปป้องกันเต็ม
 task.delay(0.5, function()
-	if getgenv().KaienProtectEnabled then
+	if getgenv().KaienProtectEnabled and getgenv().ApplyKaienShield then
 		getgenv().ApplyKaienShield() -- ป้องกันทุกอย่างอีกครั้ง
 	end
 end)
