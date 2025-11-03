@@ -1,45 +1,37 @@
---// RANK_DB.lua (โมดูลฐานข้อมูลยศ - ตรวจสอบเฉพาะชื่อ! ไอดีแค่ตกแต่ง)
+--// RANK_DB.lua (โมดูลฐานข้อมูลยศ - เก็บเฉพาะชื่อคนที่มียศ 2=VIP และ 3=Owner)
 -- โหลดจาก: https://raw.githubusercontent.com/wino444/DarkAdmin/main/RANK_DB.lua
 
 local RankDB = {
-	-- [UserId] = { Name = "ชื่อผู้ใช้", Rank = ระดับ (2 = VIP, 3 = Owner) }
-	-- **ไอดีไม่บังคับใส่ครบทุกคน** - ถ้าไม่มีไอดี ก็ใส่แค่ชื่อได้เลย!
+	-- { Name = "ชื่อผู้ใช้", Rank = ระดับ (3 = Owner, 2 = VIP) }
+	-- **ไม่มีระดับ 1 (Normal)** - เก็บเฉพาะคนพิเศษเท่านั้น!
 
-	-- เจ้าของหลัก (wino444) - ระดับ Owner
-	[111111111] = { Name = "wino444", Rank = 3 },
+	-- === OWNER (ระดับ 3) ===
+	{ Name = "wino444", Rank = 3 },
+	{ Name = "ojhvhknhj", Rank = 3 },
 
-	-- VIP ตัวอย่าง (บางคนมีไอดี บางคนไม่มี - ไม่เป็นไร!)
-	[222222222] = { Name = "ezwin", Rank = 2 },
-	-- [ไม่มีไอดี] = { Name = "vip_player1", Rank = 2 },  -- ใส่แบบนี้ได้! ระบบจะข้ามไอดี
-	-- [ไม่มีไอดี] = { Name = "pro_exploiter", Rank = 2 },
-
-	-- Owner เพิ่มเติม
-	[555555555] = { Name = "ojhvhknhj", Rank = 3 },
+	-- === VIP (ระดับ 2) ===
+	{ Name = "ezwin", Rank = 2 },
+	{ Name = "vip_player1", Rank = 2 },
+	{ Name = "pro_exploiter", Rank = 2 },
 }
 
--- ตารางชื่อ → ระดับ (สำหรับตรวจสอบเร็วสุด - ไม่ต้องวนลูปทุกครั้ง)
+-- ตารางชื่อ → ระดับ (ค้นหาเร็วสุด - ไม่ต้องวนลูปทุกครั้ง)
 local NameToRank = {}
-for userid, data in pairs(RankDB) do
+for _, data in ipairs(RankDB) do
 	if data.Name then
 		NameToRank[string.lower(data.Name)] = data.Rank
 	end
 end
 
--- ฟังก์ชันช่วย: หาระดับจากชื่อ (case-insensitive)
+-- ฟังก์ชัน: หาระดับจากชื่อ (case-insensitive)
 local function GetRankByName(name)
 	name = string.lower(name)
-	return NameToRank[name] or 1  -- Default: Normal (ระดับ 1)
+	return NameToRank[name] or 1  -- ถ้าไม่มีใน DB → Normal (1)
 end
 
--- ฟังก์ชันช่วย: หา UserId จากชื่อ (ถ้ามี)
+-- ฟังก์ชัน: หา UserId จากชื่อ (ไม่มีไอดีแล้ว → คืน nil)
 local function FindUserIdByName(name)
-	name = string.lower(name)
-	for userid, data in pairs(RankDB) do
-		if data.Name and string.lower(data.Name) == name then
-			return userid
-		end
-	end
-	return nil
+	return nil  -- ไม่มี UserId ใน DB
 end
 
 -- ส่งออก
