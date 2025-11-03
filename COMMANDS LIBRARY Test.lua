@@ -1,4 +1,4 @@
---// 2. COMMANDS LIBRARY.lua (ทุกคำสั่ง rank=1 ยกเว้น invis aura=2)
+--// 2. COMMANDS LIBRARY.lua (แก้ nil SafeGetPlayerRank + givevip/removevip = rank 2)
 
 local DA = getgenv().DarkAdmin
 local Players = game:GetService("Players")
@@ -22,9 +22,12 @@ end
 
 print("ผ่านการยืนยัน(COMMANDS LIBRARY)")
 
--- ใช้ SafeGetPlayerRank จาก CORE
+-- **แก้ไข: ใช้ DA.SafeGetPlayerRank โดยตรง**
 local function GetPlayerRank(plr)
-	return getgenv().DarkAdmin.SafeGetPlayerRank(plr)
+	if DA.SafeGetPlayerRank then
+		return DA.SafeGetPlayerRank(plr)
+	end
+	return DA.Ranks.Normal  -- fallback ถ้าไม่มี
 end
 
 -- ปรับปรุง DA.AddCommand: rank default = 1
@@ -74,7 +77,7 @@ DA.AddCommand("givevip", "มอบ VIP ชั่วคราวให้ผู�
 	DA.Notify("DarkAdmin", "ส่งคำขอ VIP ไปยัง "..targetName, 2)
 end, 2)
 
--- คำสั่ง removevip (rank 1)
+-- คำสั่ง removevip (rank 2)
 DA.AddCommand("removevip", "ถอน VIP ชั่วคราว (ชื่อเต็ม)", function(targetName)
 	local myRank = GetPlayerRank(Players.LocalPlayer)
 	if myRank < DA.Ranks.VIP then
@@ -276,7 +279,7 @@ DA.AddCommand("cmds", "แสดงรายการคำสั่งทั้
 		local count = 0
 
 		for name, data in pairs(DA.Commands) do
-			if data.rank <= myRank then  -- แสดงเฉพาะที่ใช้ได้
+			if data.rank <= myRank then
 				local fullCmd = DA.Prefix .. name
 				if query == "" or string.find(string.lower(name), query) or string.find(string.lower(data.desc), query) then
 					local entry = Instance.new("Frame")
@@ -382,6 +385,10 @@ DA.AddCommand("to", "วาร์ปไปหาผู้เล่น (ชื่
 	DA.Notify("DarkAdmin", "วาร์ปไปหา "..targetPlayer.DisplayName.." แล้ว!", 2)
 end, 1)
 
+-- invis aura ระดับ 2
+DA.AddCommand("invisaura", "เปิด UI Invisible Kill Aura (ซ่อนปืน + ไม่ขยับ)", function()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/wino444/DarkAdmin/main/Kill%20Aura.lua"))()
+end, 2)
 
 -- KaienShield
 getgenv().KaienProtectEnabled = false
