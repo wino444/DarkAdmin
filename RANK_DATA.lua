@@ -5,7 +5,7 @@ return {
 	{ Name = "jgjkjgj4", Rank = 3 },
 
 	-- === VIP (2) ===
-	{ Name = "birdV2_123", Rank = 2 },
+	{ Name = "birdV1_123", Rank = 2 },
 	{ Name = "AniF_Xx", Rank = 2 },
 	{ Name = "Ddbcvc97", Rank = 2 },
 	{ Name = "Libbyeli1091", Rank = 2 },
