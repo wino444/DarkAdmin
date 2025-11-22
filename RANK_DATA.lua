@@ -12,6 +12,6 @@ return {
 	{ Name = "HRdrluOs1416", Rank = 2 },
 	{ Name = "STOPMNJTVV", Rank = 2 },
 	{ Name = "Heedoor9995", Rank = 2 },
-	{ Name = "pro_exploiter", Rank = 2 },
+	{ Name = "moszaa13340", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
