@@ -1,1 +1,1 @@
-wss://b652df93cdee.ngrok-free.app
+wss://efbd99719eae.ngrok-free.app
