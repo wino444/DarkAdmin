@@ -18,5 +18,6 @@ return {
 	{ Name = "Libbyeli1091", Rank = 2 },
 	{ Name = "odododoo2", Rank = 2 },
 	{ Name = "MiNiKaiYungShop89989", Rank = 2 },
+	{ Name = "zx71828", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
