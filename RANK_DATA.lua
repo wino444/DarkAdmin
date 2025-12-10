@@ -20,5 +20,6 @@ return {
 	{ Name = "MiNiKaiYungShop89989", Rank = 2 },
 	{ Name = "zx71828", Rank = 2 },
 	{ Name = "Thai123456a1", Rank = 2 },
+	{ Name = "RefK0n1_0056", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
