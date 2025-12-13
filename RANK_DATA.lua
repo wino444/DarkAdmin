@@ -6,6 +6,7 @@ return {
 	
 	-- === VIP (2) ===
 	{ Name = "Toonyaganx2", Rank = 2 },
+	{ Name = "birdV3_123", Rank = 2 },
 	{ Name = "hgjhhjjg4", Rank = 2 },
 	{ Name = "Ddbcvc97", Rank = 2 },
 	{ Name = "Nadbubna27936", Rank = 2 },
@@ -21,5 +22,6 @@ return {
 	{ Name = "zx71828", Rank = 2 },
 	{ Name = "Thai123456a1", Rank = 2 },
 	{ Name = "RefK0n1_0056", Rank = 2 },
+	{ Name = "TBFDEL0", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
