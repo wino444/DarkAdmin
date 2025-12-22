@@ -24,5 +24,6 @@ return {
 	{ Name = "RefK0n1_0056", Rank = 2 },
 	{ Name = "TBFDEL0", Rank = 2 },
 	{ Name = "ZER3H", Rank = 2 },
+	{ Name = "Mopizxcd", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
