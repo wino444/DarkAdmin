@@ -28,5 +28,6 @@ return {
 	{ Name = "SUN_lGG65", Rank = 2 },
 	{ Name = "kazagaki159", Rank = 2 },
 	{ Name = "zzxxccvv0336", Rank = 2 },
+	{ Name = "burnserika", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
