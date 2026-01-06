@@ -29,5 +29,6 @@ return {
 	{ Name = "burnserika", Rank = 2 },
 	{ Name = "BanBlow", Rank = 2 },
 	{ Name = "Pookiekub0", Rank = 2 },
+	{ Name = "Fooden55", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
