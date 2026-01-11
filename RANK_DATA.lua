@@ -30,5 +30,6 @@ return {
 	{ Name = "BanBlow", Rank = 2 },
 	{ Name = "Pookiekub0", Rank = 2 },
 	{ Name = "Fooden55", Rank = 2 },
+	{ Name = "kskksk9292", Rank = 2 },
 	{ Name = "pro_exploiter", Rank = 2 },
 }
