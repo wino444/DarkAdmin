@@ -27,7 +27,7 @@ return {
 	{ Name = "kazagaki159", Rank = 2 },
 	{ Name = "zzxxccvv0336", Rank = 2 },
 	{ Name = "burnserika", Rank = 2 },
-	{ Name = "BanBlow", Rank = 2 },
+	{ Name = "85angxls", Rank = 2 },
 	{ Name = "Pookiekub0", Rank = 2 },
 	{ Name = "Fooden55", Rank = 2 },
 	{ Name = "kskksk9292", Rank = 2 },
